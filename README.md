@@ -1,5 +1,11 @@
 # Proyecto-Hormigas-AC
 
+## Visión General del Proyecto
+
+El proyecto consiste en construir un simulador interactivo de ecosistemas (modo "Dios" o *sandbox*). Los usuarios podrán alterar el entorno en tiempo real (colocando comida, veneno, muros o agua) mientras dos colonias de hormigas compiten por la supervivencia, rigiéndose estrictamente por reglas matemáticas de autómatas celulares y difusión de feromonas.
+
+Todo debe ejecutarse de forma paralela en la nube mediante Google Colab.
+
 ## Integrantes
 
 | Nombre completo                    | Código  |
