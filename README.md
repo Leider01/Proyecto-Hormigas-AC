@@ -39,31 +39,31 @@ El ecosistema se modela formalmente mediante la tupla **$A = (Q, \Sigma, V, \del
 
 ## 1. Reglas de Mortalidad, Combate y Peligros Ambientales
 
-### 1.1. Aniquilación por Depredador (`aplicar_regla_depredador`)
+### 1.1. Aniquilación por Depredador
 - **Descripción:** El Depredador (15) es una amenaza masiva. Si cualquier hormiga móvil (`HORMIGA` $\in \{8, 9, 12, 13\}$) se encuentra en la vecindad $3 \times 3$ de un depredador, muere instantáneamente y su celda pasa a estado `VACIO` (0)[cite: 1].
 - **Función de transición:**
   $$\delta(c_{(x,y)}) = \text{VACIO} \iff c_{(x,y)} \in \{8, 9, 12, 13\} \land \exists c_{(i,j)} \in V(x,y) : c_{(i,j)} = \text{DEPREDADOR}$$
 [cite: 2]
 
-### 1.2. Combate Intercolonial Asimétrico (`aplicar_regla_combate`)
+### 1.2. Combate Intercolonial Asimétrico
 - **Descripción:** Los soldados cazan a las unidades enemigas en su vecindad $3 \times 3$. El Soldado Rojo (13) aniquila tanto a Obreras Negras (8) como a Soldados Negros (9). De forma simétrica, el Soldado Negro (9) aniquila tanto a Obreras Rojas (12) como a Soldados Rojos (13). Las unidades abatidas se convierten en `VACIO` (0)[cite: 2].
 - **Función de transición:**
   $$\delta(c_{(x,y)}) = \text{VACIO} \iff \Big(c_{(x,y)} \in \{8, 9\} \land \exists c_{(i,j)} \in V(x,y) : c_{(i,j)} = 13\Big) \lor \Big(c_{(x,y)} \in \{12, 13\} \land \exists c_{(i,j)} \in V(x,y) : c_{(i,j)} = 9\Big)$$
 [cite: 2]
 
-### 1.3. Emisión Química de Alarma por Combate (`aplicar_regla_combate`)
+### 1.3. Emisión Química de Alarma por Combate
 - **Descripción:** En el instante y coordenada exacta donde ocurre una baja por combate entre colonias, se libera una descarga máxima de feromona de alarma (255) en la Capa 2 para atraer a más soldados hacia el frente de batalla[cite: 2].
 - **Función de transición:**
   $$\delta_{\text{quim}}(c_{(x,y)}) \rightarrow \text{Capa}_2(x,y) = 255 \iff \text{Se cumple la condición de baja por combate en } (x,y)$$
 [cite: 2]
 
-### 1.4. Mortalidad Retardada por Veneno (`aplicar_regla_veneno`)
+### 1.4. Mortalidad Retardada por Veneno
 - **Descripción:** El Veneno (4) afecta a todas las castas biológicas (`BIO` $\in \{7, 8, 9, 11, 12, 13\}$, incluyendo Reinas)[cite: 2]. Cuando una hormiga está en contacto con veneno en su vecindad $3 \times 3$, experimenta una probabilidad de muerte $p_{\text{muerte}} = 0.125$ por tick (supervivencia promedio $\mathbb{E}[T] = 8$ ticks)[cite: 2]. Al morir por toxicidad, la hormiga se transforma en `CADAVER` (5)[cite: 2].
 - **Función de transición:**
   $$\delta(c_{(x,y)}) = \text{CADAVER} \iff c_{(x,y)} \in \{7, 8, 9, 11, 12, 13\} \land \Big(\exists c_{(i,j)} \in V(x,y) : c_{(i,j)} = \text{VENENO}\Big) \land \Big(U(0,1) < 0.125\Big)$$
 [cite: 2]
 
-### 1.5. Expansión Ambiental del Veneno (`aplicar_regla_veneno`)
+### 1.5. Expansión Ambiental del Veneno
 - **Descripción:** El Veneno (4) se propaga sobre el suelo transitable adyacente (`VACIO` 0 o `ARENA_SECA` 1) con una probabilidad $p_{\text{exp}} = 0.03$ por tick, respetando obstáculos inmutables como los muros (2)[cite: 2].
 - **Función de transición:**
   $$\delta(c_{(x,y)}) = \text{VENENO} \iff c_{(x,y)} \in \{0, 1\} \land \Big(\exists c_{(i,j)} \in V(x,y) : c_{(i,j)} = \text{VENENO}\Big) \land \Big(U(0,1) < 0.03\Big)$$
@@ -73,37 +73,37 @@ El ecosistema se modela formalmente mediante la tupla **$A = (Q, \Sigma, V, \del
 
 ## 2. Reglas de Emisión Química Inmutable, Recolección y Limpieza
 
-### 2.1. Emisión de Feromona Real (`aplicar_emision_inmutables`)
+### 2.1. Emisión de Feromona Real
 - **Descripción:** Las Reinas (7 y 11) emiten de manera perpetua el valor máximo (255) en la Capa 3 en su propia coordenada para estabilizar la colonia y actuar como baliza GPS[cite: 2].
 - **Función de transición:**
   $$\delta_{\text{quim}}(c_{(x,y)}) \rightarrow \text{Capa}_3(x,y) = 255 \iff c_{(x,y)} \in \{\text{REINA\_N}, \text{REINA\_R}\}$$
 [cite: 2]
 
-### 2.2. Emisión de Necroferomonas (`aplicar_emision_inmutables`)
+### 2.2. Emisión de Necroferomonas
 - **Descripción:** Todo `CADAVER` (5) es físicamente inerte pero inyecta continuamente 255 en la Capa 4 (Necroferomonas) para alertar a las obreras de su presencia[cite: 3].
 - **Función de transición:**
   $$\delta_{\text{quim}}(c_{(x,y)}) \rightarrow \text{Capa}_4(x,y) = 255 \iff c_{(x,y)} = \text{CADAVER}$$
 [cite: 3]
 
-### 2.3. Señalización Química de Alimento (`aplicar_recoleccion_comida`)
+### 2.3. Señalización Química de Alimento
 - **Descripción:** Si una obrera (`OBRERA` $\in \{8, 12\}$) detecta una celda de `COMIDA` (3) en su vecindad $3 \times 3$, inyecta 255 en la Capa 1 (Rastro de Comida) en su posición actual para guiar a sus compañeras[cite: 3].
 - **Función de transición:**
   $$\delta_{\text{quim}}(c_{(x,y)}) \rightarrow \text{Capa}_1(x,y) = 255 \iff c_{(x,y)} \in \{8, 12\} \land \exists c_{(i,j)} \in V(x,y) : c_{(i,j)} = \text{COMIDA}$$
 [cite: 3]
 
-### 2.4. Consumo Físico de Comida (`aplicar_recoleccion_comida`)
+### 2.4. Consumo Físico de Comida
 - **Descripción:** Toda celda de `COMIDA` (3) que tenga al menos una obrera ($\{8, 12\}$) en su vecindad $3 \times 3$ es recolectada y pasa a estado `VACIO` (0)[cite: 3].
 - **Función de transición:**
   $$\delta(c_{(x,y)}) = \text{VACIO} \iff c_{(x,y)} = \text{COMIDA} \land \exists c_{(i,j)} \in V(x,y) : c_{(i,j)} \in \{8, 12\}$$
 [cite: 3]
 
-### 2.5. Limpieza de Cadáveres (`aplicar_limpieza_cadaveres`)
+### 2.5. Limpieza de Cadáveres
 - **Descripción:** Cuando una obrera ($\{8, 12\}$) entra en contacto adyacente ($3 \times 3$) con un `CADAVER` (5), remueve el cuerpo convirtiendo la celda del cadáver en `VACIO` (0)[cite: 3].
 - **Función de transición:**
   $$\delta(c_{(x,y)}) = \text{VACIO} \iff c_{(x,y)} = \text{CADAVER} \land \exists c_{(i,j)} \in V(x,y) : c_{(i,j)} \in \{8, 12\}$$
 [cite: 3]
 
-### 2.6. Emisión de Reclutamiento y Basurero (`aplicar_limpieza_cadaveres`)
+### 2.6. Emisión de Reclutamiento y Basurero
 - **Descripción:** Las celdas de `BASURERO` (14) y las coordenadas donde se acaba de limpiar un cadáver inyectan 255 en la Capa 5 (Reclutamiento) para coordinar tareas de higiene[cite: 3].
 - **Función de transición:**
   $$\delta_{\text{quim}}(c_{(x,y)}) \rightarrow \text{Capa}_5(x,y) = 255 \iff c_{(x,y)} = \text{BASURERO} \lor \text{Se limpió cadáver en } (x,y)$$
@@ -111,7 +111,7 @@ El ecosistema se modela formalmente mediante la tupla **$A = (Q, \Sigma, V, \del
 
 ---
 
-## 3. Generación de Unidades en Nidos (`aplicar_generacion_nidos`)
+## 3. Generación de Unidades en Nidos
 
 ### 3.1. Natalidad Estocástica por Casta y Colonia
 - **Descripción:** Los nidos (`NIDO_N` = 6 y `NIDO_R` = 10) generan nuevas hormigas en celdas `VACIO` (0) de su vecindad $3 \times 3$ con $P_{\text{nac}} = 0.05$ por tick[cite: 3]. El $80\%$ son Obreras ($U_2 \ge 0.20$) y el $20\%$ son Soldados ($U_2 < 0.20$)[cite: 3].
