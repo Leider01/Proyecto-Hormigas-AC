@@ -1,0 +1,183 @@
+:root {
+  --fondo: #121214;
+  --superficie: #1b1b1f;
+  --borde: #2c2c33;
+  --texto: #e6e6ea;
+  --tenue: #9a9aa6;
+  --acento: #ffd23f;
+  --rastro: #38bdf8;
+  --alarma: #ffe14d;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  --alto-cabecera: 56px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --- Cabecera ------------------------------------------------------------ */
+.cabecera {
+  height: var(--alto-cabecera);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--borde);
+}
+.cabecera h1 {
+  margin: 0;
+  font: 600 16px var(--mono);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.cabecera h1 span { color: var(--tenue); font-weight: 400; }
+
+/* --- Distribución: lienzo a la izquierda, panel a la derecha -------------- */
+.contenedor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  padding: 20px;
+}
+
+.escenario {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+#lienzo {
+  width: min(100%, calc(100vh - var(--alto-cabecera) - 40px));
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  cursor: crosshair;
+  touch-action: none;
+  background: #000;
+}
+
+/* --- Panel ---------------------------------------------------------------- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bloque {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.bloque h2, .leyenda summary {
+  margin: 0 0 10px;
+  font: 600 12px var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tenue);
+}
+
+button {
+  font: 500 13px var(--mono);
+  color: var(--texto);
+  background: #26262d;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+button:hover { background: #303039; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+button.activo { border-color: var(--acento); color: var(--acento); }
+
+.botones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+
+.muestra {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  vertical-align: -1px;
+  flex: none;
+}
+.bloque h3 {
+  margin: 12px 0 8px;
+  font: 600 11px var(--mono);
+  color: var(--tenue);
+}
+
+.pinceles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.pinceles label, .casilla {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pinceles label:hover, .casilla:hover { background: #24242b; }
+.pinceles label:has(input:checked) { background: #2a2a33; outline: 1px solid var(--acento); }
+.pinceles input, .casilla input { margin: 0; accent-color: var(--acento); }
+
+.grosor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-family: var(--mono);
+}
+.grosor button { width: 32px; padding: 4px 0; }
+.grosor output { min-width: 36px; text-align: center; }
+
+.velocidad {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+}
+.velocidad input { width: 100%; accent-color: var(--acento); }
+
+.estadisticas { list-style: none; margin: 0; padding: 0; font-family: var(--mono); }
+.estadisticas li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--borde);
+}
+.estadisticas li:last-child { border-bottom: 0; }
+.estadisticas b { color: var(--acento); font-variant-numeric: tabular-nums; }
+
+.leyenda summary { margin: 0; cursor: pointer; }
+.leyenda[open] summary { margin-bottom: 8px; }
+.leyenda ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 8px;
+  font: 12px var(--mono);
+}
+
+/* --- Celular: el panel baja debajo del lienzo ------------------------------ */
+@media (max-width: 860px) {
+  .contenedor { grid-template-columns: 1fr; padding: 16px; }
+  #lienzo { width: 100%; }
+  .cabecera { padding: 0 16px; }
+  .cabecera h1 { font-size: 13px; }
+}
+
+.origen { margin: 0 0 0 auto; font: 12px var(--mono); color: var(--tenue); }
+.origen.error { color: #ff6b6b; }

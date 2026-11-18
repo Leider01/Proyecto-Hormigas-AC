@@ -1,0 +1,4 @@
+# Motor en CPU (NumPy). Funciona en cualquier computador.
+# Probado con Python 3.14.6 en Windows 11.
+numpy==2.5.5
+scipy==1.18.1

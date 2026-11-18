@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de Colonia de Hormigas</title>
+  <meta name="description" content="Autómata celular interactivo de dos colonias de hormigas guiadas por feromonas (ACO). Modo Dios.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1>🐜 Simulador de Colonia de Hormigas <span>— Modo Dios</span></h1>
+    <p class="origen" id="origen">Conectando con el backend…</p>
+  </header>
+
+  <main class="contenedor">
+    <section class="escenario" aria-label="Pantalla de la simulación">
+      <canvas id="lienzo" width="500" height="500"
+        aria-label="Mundo de 500 por 500 celdas. Haga clic o arrastre para pintar con el pincel elegido."></canvas>
+    </section>
+
+    <aside class="panel">
+      <section class="bloque">
+        <h2>🛠 Panel de control</h2>
+        <div class="botones">
+          <button id="btn-play" type="button">▶ Play</button>
+          <button id="btn-pausa" type="button">⏸ Pausa</button>
+          <button id="btn-reset" type="button">🔄 Reset</button>
+        </div>
+      </section>
+
+      <section class="bloque">
+        <h2>🎨 Herramientas (pinceles)</h2>
+        <div class="pinceles" role="radiogroup" aria-label="Pincel">
+          <label><input type="radio" name="pincel" value="colonia-n" checked><span class="muestra"></span>Colonia N.</label>
+          <label><input type="radio" name="pincel" value="colonia-r"><span class="muestra"></span>Colonia R.</label>
+          <label><input type="radio" name="pincel" value="muro"><span class="muestra"></span>Muro</label>
+          <label><input type="radio" name="pincel" value="comida"><span class="muestra"></span>Comida</label>
+          <label><input type="radio" name="pincel" value="veneno"><span class="muestra"></span>Veneno</label>
+          <label><input type="radio" name="pincel" value="hormiga-n"><span class="muestra"></span>Hormiga N.</label>
+          <label><input type="radio" name="pincel" value="hormiga-r"><span class="muestra"></span>Hormiga R.</label>
+          <label><input type="radio" name="pincel" value="soldado-n"><span class="muestra"></span>Soldado N.</label>
+          <label><input type="radio" name="pincel" value="soldado-r"><span class="muestra"></span>Soldado R.</label>
+          <label><input type="radio" name="pincel" value="borrar"><span class="muestra"></span>Borrar</label>
+          <label><input type="radio" name="pincel" value="depredador"><span class="muestra"></span>Araña</label>
+          <label><input type="radio" name="pincel" value="arena"><span class="muestra"></span>Arena seca</label>
+          <label><input type="radio" name="pincel" value="cadaver"><span class="muestra"></span>Cadáver</label>
+          <label><input type="radio" name="pincel" value="basurero"><span class="muestra"></span>Basurero</label>
+        </div>
+        <h3>Feromonas</h3>
+        <div class="pinceles" role="radiogroup" aria-label="Pincel de feromona">
+          <label><input type="radio" name="pincel" value="f-rastro"><span class="muestra"></span>Rastro comida</label>
+          <label><input type="radio" name="pincel" value="f-alarma"><span class="muestra"></span>Alarma</label>
+          <label><input type="radio" name="pincel" value="f-real"><span class="muestra"></span>Real</label>
+          <label><input type="radio" name="pincel" value="f-necro"><span class="muestra"></span>Necro</label>
+          <label><input type="radio" name="pincel" value="f-reclutamiento"><span class="muestra"></span>Reclutamiento</label>
+        </div>
+        <div class="grosor">
+          <span>Grosor:</span>
+          <button id="grosor-menos" type="button" aria-label="Reducir grosor">−</button>
+          <output id="grosor-valor">3×3</output>
+          <button id="grosor-mas" type="button" aria-label="Aumentar grosor">+</button>
+        </div>
+      </section>
+
+      <section class="bloque">
+        <h2>👁 Visor químico (feromonas)</h2>
+        <label class="casilla"><input type="checkbox" data-capa="rastro"><span class="muestra"></span>Ver rastro de comida</label>
+        <label class="casilla"><input type="checkbox" data-capa="alarma"><span class="muestra"></span>Ver alarma / peligro</label>
+        <label class="casilla"><input type="checkbox" data-capa="real"><span class="muestra"></span>Ver feromona real</label>
+        <label class="casilla"><input type="checkbox" data-capa="necro"><span class="muestra"></span>Ver necroferomonas</label>
+        <label class="casilla"><input type="checkbox" data-capa="reclutamiento"><span class="muestra"></span>Ver reclutamiento</label>
+      </section>
+
+      <section class="bloque">
+        <h2>⏱ Velocidad de simulación</h2>
+        <div class="velocidad">
+          <label for="delay">Delay</label>
+          <input type="range" id="delay" min="0" max="0.5" step="0.01" value="0.05">
+          <output id="delay-valor">0.05 s</output>
+        </div>
+      </section>
+
+      <section class="bloque">
+        <h2>📊 Estadísticas</h2>
+        <ul class="estadisticas">
+          <li>Turno (tick) <b id="stat-tick">0</b></li>
+          <li>Hormigas negras <b id="stat-negras">0</b></li>
+          <li>Hormigas rojas <b id="stat-rojas">0</b></li>
+          <li>Reservas negras <b id="stat-reservas-negras">—</b></li>
+          <li>Reservas rojas <b id="stat-reservas-rojas">—</b></li>
+          <li>Tiempo por tick <b id="stat-ms">—</b></li>
+        </ul>
+      </section>
+
+      <details class="bloque leyenda">
+        <summary>Alfabeto de estados (Σ)</summary>
+        <ul id="leyenda"></ul>
+      </details>
+    </aside>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
