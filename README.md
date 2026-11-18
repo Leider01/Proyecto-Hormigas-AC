@@ -169,4 +169,4 @@ U\{0, 1, 2, 3, 4, 5, 6, 7\} & \text{en caso contrario}
 $$
 
 #### 4.2. Intercambio de Celdas y Filtro de Terreno
-- **Descripción:** Las hormigas no se desplazan como objetos continuos, sino que transfieren su estado a la celda destino $$(x', y') = (x + \Delta y_{d^*}, y + \Delta x_{d^*})$$. La transición ocurre solo si la unidad no se ha movido en el *tick* actual y el terreno destino es transitable (`VACIO` `0` o `ARENA_SECA` `1`). Muros (`2`) y otras entidades bloquean el paso.
+- **Descripción:** Las hormigas no se desplazan como objetos continuos, sino que transfieren su estado a la celda destino $$ (x', y') = (x + \Delta y_{d^*}, y + \Delta x_{d^*}) $$. La transición ocurre solo si la unidad no se ha movido en el *tick* actual y el terreno destino es transitable (`VACIO` `0` o `ARENA_SECA` `1`). Muros (`2`) y otras entidades bloquean el paso.
