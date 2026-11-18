@@ -91,21 +91,6 @@ src/
 
 Con los valores del cuaderno, el port da los mismos alcances de señal (comida 31 celdas, feromona real 23) y la misma evolución que el motor en Python: con la comida a 30 celdas, a los 700 turnos la colonia negra entregó las 100 celdas de comida y la roja murió de hambre en ambos.
 
-## Correcciones
-
-| Fallo del cuaderno | Corrección en la web |
-|---|---|
-| Una colonia pintada después de que otra del mismo color murió de hambre muere en el siguiente turno, porque el contador de hambre no se reinicia. | Una colonia nueva arranca con reservas iniciales y sin hambre acumulada. |
-| Las obreras y los soldados son inmortales: si la reina muere, la colonia sigue para siempre. | Sin nido ni reina de su color, cada hormiga muere con probabilidad 0,01 por turno. |
-| Un nido sin reina pare si hay cualquier otra reina del mismo color en el mapa. | Solo pare el nido que tiene su reina al lado. |
-| La comida a más de ~45 celdas nunca se encuentra: el rastro de regreso se borra antes de llegar al nido y el retorno a la reina (20 %) mantiene a las obreras cerca de casa. | Radio de búsqueda de 60 celdas, rastro que pierde 2 por paso y 1 por turno, retorno del 3 % y reserva inicial de 150. Con comida a ~100 celdas la colonia sobrevive. |
-| Las reservas se acumulan sin uso y la colonia gasta en nacimientos lo que necesita para no pasar hambre. | La probabilidad de nacer sube con las reservas (hasta 0,25) y no se gastan las últimas 40 en nacimientos. |
-| La araña arrasa una colonia pequeña, porque hacen falta 4 soldados a la vez para matarla, y no ataca a las reinas aunque el veneno sí las mata. | La matan 3 soldados y también ataca a las reinas. |
-| La arena seca no acelera la evaporación. | Sobre arena seca la química pierde 4 unidades más por turno. |
-| El motor tarda 4,3 s por tick a 1000 × 1000 y 0,4–0,6 s a 500 × 500. | Las reglas se calculan solo donde hay entidades y los caminos con búsqueda en anchura: unos 30 ms por tick a 500 × 500. |
-
-Lo que se conserva a propósito: las reglas de un turno se aplican en cadena sobre la matriz de escritura, como en el motor (una hormiga que muere en combate ya no se mueve en ese turno). El doble búfer separa un turno del siguiente.
-
 ## Adaptaciones para la web
 
 - **Araña de un clic:** como en la API, el pincel pone una sola araña aunque el grosor sea mayor, y se dibuja como un sprite de 3 × 3.
