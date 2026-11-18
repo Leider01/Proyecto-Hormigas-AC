@@ -91,7 +91,7 @@ $$
 - **Función de transición:**
 
 $$
-\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_3(x, y) = 255 \iff c(x, y) \in \{\text{REINA\_N}, \text{REINA\_R}\}
+\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_3(x, y) = 255 \iff c(x, y) \in \{\text{REINA N}, \text{REINA R}\}
 $$
 
 #### 2.2. Emisión de Necroferomonas
@@ -144,10 +144,10 @@ $$
 
 $$
 \delta(c(x, y)) = \begin{cases}
-\text{OBRERA\_N } (8) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 6 \land U_2 \ge 0.20 \\
-\text{SOLDADO\_N } (9) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 6 \land U_2 < 0.20 \\
-\text{OBRERA\_R } (12) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 10 \land U_2 \ge 0.20 \\
-\text{SOLDADO\_R } (13) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 10 \land U_2 < 0.20
+\text{OBRERA N } (8) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 6 \land U_2 \ge 0.20 \\
+\text{SOLDADO N } (9) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 6 \land U_2 < 0.20 \\
+\text{OBRERA R } (12) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 10 \land U_2 \ge 0.20 \\
+\text{SOLDADO R } (13) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 10 \land U_2 < 0.20
 \end{cases}
 $$
 
