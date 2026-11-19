@@ -1,177 +1,75 @@
 # Proyecto-Hormigas-AC
 
-## Visión General del Proyecto
+🐜 Simulador de Colonia de Hormigas — Autómata Celular (ACO)
+Proyecto final de la asignatura Autómatas y Lenguajes Formales (Universidad Industrial de Santander — UIS, Grupo 2, 2026-2).
+Simulador interactivo en "Modo Dios" donde dos colonias de hormigas (Negra y Roja) compiten por sobrevivir, recolectar alimento, defenderse de depredadores y gestionar sus reservas energéticas sobre un mundo de 500500 celdas. Toda la simulación es calculada en paralelo sobre tarjeta gráfica NVIDIA mediante MotorCuPy (con respaldo equivalente en CPU vía MotorNumPy), mientras que el navegador renderiza el estado y envía las herramientas de edición en tiempo real.
 
-El proyecto consiste en construir un simulador interactivo de ecosistemas (modo "Dios" o *sandbox*). Los usuarios podrán alterar el entorno en tiempo real (colocando comida, veneno, muros o agua) mientras dos colonias de hormigas compiten por la supervivencia, rigiéndose estrictamente por reglas matemáticas de autómatas celulares y difusión de feromonas.
+## 👥 Integrantes del Equipo
 
-Todo debe ejecutarse de forma paralela en la nube mediante Google Colab.
+| Subgrupo | Rol Principal | Integrantes |
+| :--- | :--- | :--- |
+| **Subgrupo 1** | Documentación y Formalización Matemática | <a href="https://github.com/Leider01"><img src="https://github.com/Leider01.png" width="30" height="30" align="absmiddle"></a> [**Leider Yesid Gómez Giraldo**](https://github.com/Leider01) (`2232503`)<br><a href="https://github.com/HAUNTERVII"><img src="https://github.com/HAUNTERVII.png" width="30" height="30" align="absmiddle"></a> [**Jose Ángel Soto Ramírez**](https://github.com/HAUNTERVII) (`2250201`) |
+| **Subgrupo 2** | Interfaz Web y Visualización (Frontend) | <a href="https://github.com/JoshepLizarazo"><img src="https://github.com/JoshepLizarazo.png" width="30" height="30" align="absmiddle"></a> [**Joshep Jared Lizarazo Montero**](https://github.com/JoshepLizarazo) (`2250150`)<br><a href="https://github.com/Bramdonjgv"><img src="https://github.com/Bramdonjgv.png" width="30" height="30" align="absmiddle"></a> [**Bramdon Julián González Velandia**](https://github.com/Bramdonjgv) (`2250196`) |
+| **Subgrupo 3** | Motor Físico-Químico, GPU (CuPy) y API Modo Dios | <a href="https://github.com/Stivencaballero0710"><img src="https://github.com/Stivencaballero0710.png" width="30" height="30" align="absmiddle"></a> [**Jannyer Stiven Caballero Domínguez**](https://github.com/Stivencaballero0710) (`2250191`)<br><a href="https://github.com/carlosmerlano"><img src="https://github.com/carlosmerlano.png" width="30" height="30" align="absmiddle"></a> [**Carlos Iván Merlano Vergara**](https://github.com/carlosmerlano) (`2250188`)<br><a href="https://github.com/ItsNico0104"><img src="https://github.com/ItsNico0104.png" width="30" height="30" align="absmiddle"></a> [**Nicolás Arturo Carrillo Hernández**](https://github.com/ItsNico0104) (`2250165`) |
+| **Subgrupo 4** | Reglas Biológicas, Calibración y Validación (QA) | <a href="https://github.com/Angel-Jimenez08"><img src="https://github.com/Angel-Jimenez08.png" width="30" height="30" align="absmiddle"></a> [**Ángel Santiago Jiménez Rincón**](https://github.com/Angel-Jimenez08) (`2251260`)<br><a href="https://github.com/xJulianGodoyx"><img src="https://github.com/xJulianGodoyx.png" width="30" height="30" align="absmiddle"></a> [**Pedro Julián Suarez Godoy**](https://github.com/xJulianGodoyx) (`2232725`)<br><a href="https://github.com/Derly0"><img src="https://github.com/Derly0.png" width="30" height="30" align="absmiddle"></a> [**Derly Yurany Sanabria Barragán**](https://github.com/Derly0) (`2245003`) |
 
-## Integrantes
 
-| Foto | Nombre completo                    | Código  | Foto | Nombre completo                    | Código  |
-|:----:|:-----------------------------------|:-------:|:----:|:-----------------------------------|:-------:|
-| <a href="https://github.com/xJulianGodoyx"><img src="https://github.com/xJulianGodoyx.png" width="60" height="60"></a> | **Pedro Julián Suarez Godoy** | 2232725 | <a href="https://github.com/carlosmerlano"><img src="https://github.com/carlosmerlano.png" width="60" height="60"></a> | **Carlos Iván Merlano Vergara** | 2250188 |
-| <a href="https://github.com/Angel-Jimenez08"><img src="https://github.com/Angel-Jimenez08.png" width="60" height="60"></a> | **Ángel Santiago Jiménez Rincón** | 2251260 | <a href="https://github.com/ItsNico0104"><img src="https://github.com/ItsNico0104.png" width="60" height="60"></a> | **Nicolás Arturo Carrillo Hernández** | 2250165 |
-| <a href="https://github.com/JoshepLizarazo"><img src="https://github.com/JoshepLizarazo.png" width="60" height="60"></a> | **Joshep Jared Lizarazo Montero** | 2250150 | <a href="https://github.com/Stivencaballero0710"><img src="https://github.com/Stivencaballero0710.png" width="60" height="60"></a> | **Jannyer Stiven Caballero Domínguez** | 2250191 |
-| <a href="https://github.com/HAUNTERVII"><img src="https://github.com/HAUNTERVII.png" width="60" height="60"></a> | **Jose Ángel Soto Ramírez** | 2250201 | <a href="https://github.com/Bramdonjgv"><img src="https://github.com/Bramdonjgv.png" width="60" height="60"></a> | **Bramdon Julián González Velandia** | 2250196 |
-| <a href="https://github.com/Derly0"><img src="https://github.com/Derly0.png" width="60" height="60"></a> | **Derly Yurany Sanabria Barragán** | 2245003 | <a href="https://github.com/Leider01"><img src="https://github.com/Leider01.png" width="60" height="60"></a> | **Leider Yesid Gómez Giraldo** | 2232503 |
+📐 Formalización Matemática del Modelo
+El ecosistema se modela formalmente como un Autómata Celular Estocástico Multicapa con Memoria Auxiliar Acoplada, definido mediante la 6-tupla:
+$$\mathcal{A} = \left( \mathcal{L}, \, \Sigma, \, \mathcal{Q}, \, \mathcal{E}, \, \mathcal{N}, \, \delta \right)$$
+Retículo Espacial ($\mathcal{L}$): Cuadrícula bidimensional finita de dimensiones MN=500500 ($|\mathcal{L}| = 250\,000$ celdas) con fronteras cerradas perimetrales fijas en $\text{MURO} = 2$ (sin efecto toroidal, implementada mediante desplazamientos por slicing en trasladar).
+Alfabeto Físico ( — Capa 0): Conjunto de 16 estados discretos en uint8:
+Terreno ($0\text{–}2$): 0: VACIO, 1: ARENA_SECA (sustrato persistente que reduce la movilidad al $50\,\%$), 2: MURO.
+Objetos y Eventos ($3\text{–}5$): 3: COMIDA, 4: VENENO, 5: CADAVER.
+Colonia Negra ($6\text{–}9$): 6: NIDO_N, 7: REINA_N, 8: OBRERA_N, 9: SOLDADO_N.
+Colonia Roja ($10\text{–}13$): 10: NIDO_R, 11: REINA_R, 12: OBRERA_R, 13: SOLDADO_R.
+Entidades Neutrales ($14\text{–}15$): 14: BASURERO, 15: DEPREDADOR (Araña).
+Espacio del Tensor ($\mathcal{Q}$): Tensor tridimensional de forma (500, 500, 6) en precisión uint8 (0..255) administrado con doble búfer (actual para lectura y siguiente para escritura):
+Capa 0: Física ().
+Capa 1: CAPA_RASTRO_COMIDA (pérdida espacial =7).
+Capa 2: CAPA_ALARMA (pérdida espacial =4).
+Capa 3: CAPA_FEROMONA_REAL (pérdida espacial =10).
+Capa 4: CAPA_NECROFEROMONAS (pérdida espacial =7).
+Capa 5: CAPA_RECLUTAMIENTO (pérdida espacial =7).
+Memoria Auxiliar Acoplada ($\mathcal{E}$): Arreglos paralelos fuera de las 6 capas que viajan sincronizados con cada entidad (carga_comida, pasos_con_carga, direccion_anterior, terreno_arena) y métricas globales por colonia (reservas_nido, turnos_hambre, comida_entregada).
+Vecindades ($\mathcal{N}$):
+Von Neumann (4 vecinos en cruz): utilizada para la difusión química (difundir).
+Moore (8 vecinos): utilizada para el sensado de presencia (33), lectura de gradientes, rutas BFS, combate y movimiento.
+Función de Transición (): Composición secuencial por turno (tt+1) de los operadores de física química ($\delta_{\text{fis}}$) y reglas biológicas ($\delta_{\text{bio}}$).
 
-## Formalización de Reglas Biológicas y Lógica del Entorno
+⚙️ Dinámica del Motor (motores_colab_corregidos.py)
+Ciclo de cada Turno (avanzar_tick)
+Drenado de ModoDios: Se aplican bajo threading.Lock() los pinceles físicos (1..15) y químicos (-1..-5, intensidad 220) encolados desde la interfaz, limpiando la memoria auxiliar de las celdas modificadas y actualizando terreno_arena.
+Emisión de Fuentes Inmutables: Reinas (Capa 3), cadáveres (Capa 4), comida (Capa 1) y basureros (Capa 5) inyectan intensidad máxima (255).
+Física Química ($\delta_{\text{fis}}$):
+Evaporación uniforme (LUT): Cada capa química pierde PERDIDA_EVAPORACION = 2 unidades por turno mediante indexación directa en una tabla precalculada.
+Difusión en cruz (PASOS_DIFUSION = 2): Se propaga en precisión temporal int16 tomando en cada celda libre el máximo entre su valor y el de sus 4 vecinos ortogonales menos la pérdida del kernel, bloqueada completamente por los muros.
+Reglas Biológicas ($\delta_{\text{bio}}$):
+Veneno: Mortalidad estocástica de 0.125 en vecindad 33 (afecta hormigas, reinas y arañas), generando CADAVER y ALARMA = 255. Se expande con probabilidad 0.01 respetando un tope real del $8\,\%$ del tablero.
+Depredador (Araña): Ocupa 1 celda física (renderizada como sprite 33). Persigue presas con un radar de calor de 8 casillas bloqueado por muros, se mueve con probabilidad 0.35 y ataca a 1 hormiga adyacente (obrera o soldado) con probabilidad 0.35 dejando CADAVER y alarma. Emite un halo constante de alarma 33 y muere rodeada por 4 soldados o por veneno.
+Combate intercolonial: Simétrico en vecindad 33; toda hormiga que toque a un soldado rival pasa a CADAVER e inyecta ALARMA = 255.
+Recolección, rastro y entrega: Cada obrera libre toma máximo 1 celda de comida por turno. Al regresar cargada deposita rastro decreciente $\max(30, \, 220 - 3 \cdot \text{pasos})$. Al tocar su nido o reina suma +20 reservas.
+Navegación y movimiento vectorizado: Combina campos de distancia BFS con caché (RADIO_BUSQUEDA_COMIDA = 16 para comida; ilimitado hacia el hogar), gradiente químico estricto con exclusión de mesetas ($\text{máximo} > \text{celda actual}$), retorno ocasional por feromona real (0.20) y exploración con $75\,\%$ de inercia evitando retroceder si hay otra salida libre. El desplazamiento se resuelve en paralelo en orden aleatorio de direcciones sin colisiones y con $50\,\%$ de fricción sobre arena seca.
+Higiene, metabolismo y natalidad: Las obreras limpian cadáveres adyacentes emitiendo RECLUTAMIENTO = 255. Cada colonia inicia con 100 de reserva, consume 0.2 por turno y muere tras 300 turnos con reservas en cero. Cada nacimiento cuesta 5.0 (probabilidad 0.05: $80\,\%$ obreras, $20\,\%$ soldados) mientras exista al menos una reina viva de su color.
+Publicación: Se copia siguiente sobre actual (xp.copyto) y se incrementa el contador tick. La transferencia VRAM  RAM (snapshot_cpu()) ocurre únicamente cuando la interfaz solicita un fotograma.
 
-El ecosistema del autómata celular se modela matemáticamente mediante la tupla $\mathcal{A} = (Q, \Sigma, V, \delta)$:
 
-- **Conjunto de Estados Físicos ($Q$):** Representado en la Capa 0 del tensor (`uint8`), conformado por 16 estados discretos:
-  - **Terrenos:** `VACIO` (`0`), `ARENA_SECA` (`1`), `MURO` (`2`).
-  - **Consumibles y Eventos:** `COMIDA` (`3`), `VENENO` (`4`), `CADAVER` (`5`).
-  - **Colonia Negra:** `NIDO_N` (`6`), `REINA_N` (`7`), `OBRERA_N` (`8`), `SOLDADO_N` (`9`).
-  - **Colonia Roja:** `NIDO_R` (`10`), `REINA_R` (`11`), `OBRERA_R` (`12`), `SOLDADO_R` (`13`).
-  - **Entidades Neutrales:** `BASURERO` (`14`), `DEPREDADOR` (`15`).
-- **Alfabeto Químico ($\Sigma$):** Representado en las Capas 1 a 5 del tensor, donde cada celda almacena una intensidad discreta en el rango $[0, 255]$:
-  - **Capa 1:** Rastro de Comida.
-  - **Capa 2:** Feromona de Alarma (Combate).
-  - **Capa 3:** Feromona Real (GPS hacia Nidos/Reinas).
-  - **Capa 4:** Necroferomonas (Presencia de Cadáveres).
-  - **Capa 5:** Reclutamiento (Limpieza y Basurero).
-- **Vecindad Espacial ($V$):** Vecindad de Moore de $3 \times 3$ alrededor de la coordenada central $(x, y)$, excluyendo la propia celda al escanear adyacencias:
+🚀 Requisitos y Ejecución Local (GPU NVIDIA)
+Requisitos previos
+Tarjeta gráfica NVIDIA con soporte CUDA (requerida para MotorCuPy).
+Python 3.10 o superior.
+Ubicar el proyecto en una ruta corta (por ejemplo, C:\Users\<usuario>\Documents\Proyecto-Hormigas-AC) para evitar el error 206 de Windows al cargar librerías de CUDA.
+1. Instalación (solo la primera vez)
+Cree el entorno virtual fuera de OneDrive (el paquete supera 1 GB):
+python -m venv C:\Users\<usuario>\.venvs\hormigas
+C:\Users\<usuario>\.venvs\hormigas\Scripts\python -m pip install -r web-colonia-hormigas/localhost/requirements.txt
+Nota sobre CUDA: requirements.txt instala cupy-cuda13x[ctk] (para controladores con CUDA 13). Revise su versión con nvidia-smi; si dispone de CUDA 12, reemplace esa línea por cupy-cuda12x[ctk] antes de instalar.
+2. Iniciar el simulador
+Desde la carpeta web-colonia-hormigas/localhost:
+C:\Users\<usuario>\.venvs\hormigas\Scripts\python servidor.py
+Abra su navegador en http://localhost:8000 (si el puerto está ocupado, use servidor.py --puerto 8010). Para detener el servidor, presione Ctrl + C.
 
-$$
-V(x, y) = \{ c(i, j) \mid \max(|x - i|, |y - j|) = 1 \}
-$$
-
----
-
-### 1. Reglas de Mortalidad, Combate y Peligros Ambientales
-
-#### 1.1. Aniquilación por Depredador (`aplicar_regla_depredador`)
-- **Descripción:** El `DEPREDADOR` (`15`) es una amenaza masiva. Si cualquier hormiga móvil ($\text{HORMIGA} \in \{8, 9, 12, 13\}$) se encuentra en la vecindad $3 \times 3$ de un depredador, muere instantáneamente y su celda pasa a estado `VACIO` (`0`).
-- **Función de transición:**
-
-$$
-\delta(c(x, y)) = \text{VACIO} \iff c(x, y) \in \{8, 9, 12, 13\} \land \exists c(i, j) \in V(x, y) : c(i, j) = \text{DEPREDADOR}
-$$
-
-#### 1.2. Combate Intercolonial Asimétrico
-- **Descripción:** Los soldados cazan a las unidades enemigas en su vecindad $3 \times 3$. El Soldado Rojo (`13`) aniquila tanto a Obreras Negras (`8`) como a Soldados Negros (`9`). De forma simétrica, el Soldado Negro (`9`) aniquila tanto a Obreras Rojas (`12`) como a Soldados Rojos (`13`). Las unidades abatidas se convierten en `VACIO` (`0`).
-- **Función de transición:**
-
-$$
-\delta(c(x, y)) = \text{VACIO} \iff \big(c(x, y) \in \{8, 9\} \land \exists c(i, j) \in V(x, y) : c(i, j) = 13\big) \lor \big(c(x, y) \in \{12, 13\} \land \exists c(i, j) \in V(x, y) : c(i, j) = 9\big)
-$$
-
-#### 1.3. Emisión Química de Alarma por Combate
-- **Descripción:** En el instante y coordenada exacta donde ocurre una baja por combate entre colonias, se libera una descarga máxima de feromona de alarma (`255`) en la Capa 2 para atraer a más soldados hacia el frente de batalla.
-- **Función de transición:**
-
-$$
-\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_2(x, y) = 255 \iff \text{Baja por combate en } (x, y)
-$$
-
-#### 1.4. Mortalidad Retardada por Veneno
-- **Descripción:** El `VENENO` (`4`) afecta a todas las castas biológicas ($\text{BIO} \in \{7, 8, 9, 11, 12, 13\}$, incluyendo Reinas). Cuando una hormiga está en contacto con veneno en su vecindad $3 \times 3$, experimenta una probabilidad de muerte $p_{\text{muerte}} = 0.125$ por *tick* (esperanza de supervivencia $E[T] = 8$ *ticks*). Al morir por toxicidad, la hormiga se transforma en `CADAVER` (`5`).
-- **Función de transición:**
-
-$$
-\delta(c(x, y)) = \text{CADAVER} \iff c(x, y) \in \{7, 8, 9, 11, 12, 13\} \land \big(\exists c(i, j) \in V(x, y) : c(i, j) = \text{VENENO}\big) \land \big(U(0, 1) < 0.125\big)
-$$
-
-#### 1.5. Expansión Ambiental del Veneno
-- **Descripción:** El `VENENO` (`4`) se propaga sobre el suelo transitable adyacente (`VACIO` `0` o `ARENA_SECA` `1`) con una probabilidad $p_{\text{exp}} = 0.03$ por *tick*, respetando obstáculos inmutables como los muros (`2`).
-- **Función de transición:**
-
-$$
-\delta(c(x, y)) = \text{VENENO} \iff c(x, y) \in \{0, 1\} \land \big(\exists c(i, j) \in V(x, y) : c(i, j) = \text{VENENO}\big) \land \big(U(0, 1) < 0.03\big)
-$$
-
----
-
-### 2. Reglas de Emisión Química Inmutable, Recolección y Limpieza
-
-#### 2.1. Emisión de Feromona Real
-- **Descripción:** Las Reinas (`7` y `11`) emiten de manera perpetua el valor máximo (`255`) en la Capa 3 en su propia coordenada para estabilizar la colonia y actuar como baliza GPS.
-- **Función de transición:**
-
-$$
-\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_3(x, y) = 255 \iff c(x, y) \in \{\text{REINA N}, \text{REINA R}\}
-$$
-
-#### 2.2. Emisión de Necroferomonas
-- **Descripción:** Todo `CADAVER` (`5`) es físicamente inerte pero inyecta continuamente `255` en la Capa 4 (Necroferomonas) para alertar a las obreras de su presencia.
-- **Función de transición:**
-
-$$
-\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_4(x, y) = 255 \iff c(x, y) = \text{CADAVER}
-$$
-
-#### 2.3. Señalización Química de Alimento
-- **Descripción:** Si una obrera ($\text{OBRERA} \in \{8, 12\}$) detecta una celda de `COMIDA` (`3`) en su vecindad $3 \times 3$, inyecta `255` en la Capa 1 (Rastro de Comida) en su posición actual para guiar a sus compañeras.
-- **Función de transición:**
-
-$$
-\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_1(x, y) = 255 \iff c(x, y) \in \{8, 12\} \land \exists c(i, j) \in V(x, y) : c(i, j) = \text{COMIDA}
-$$
-
-#### 2.4. Consumo Físico de Comida
-- **Descripción:** Toda celda de `COMIDA` (`3`) que tenga al menos una obrera (`8`, `12`) en su vecindad $3 \times 3$ es recolectada y pasa a estado `VACIO` (`0`).
-- **Función de transición:**
-
-$$
-\delta(c(x, y)) = \text{VACIO} \iff c(x, y) = \text{COMIDA} \land \exists c(i, j) \in V(x, y) : c(i, j) \in \{8, 12\}
-$$
-
-#### 2.5. Limpieza de Cadáveres
-- **Descripción:** Cuando una obrera (`8`, `12`) entra en contacto adyacente ($3 \times 3$) con un `CADAVER` (`5`), remueve el cuerpo convirtiendo la celda del cadáver en `VACIO` (`0`).
-- **Función de transición:**
-
-$$
-\delta(c(x, y)) = \text{VACIO} \iff c(x, y) = \text{CADAVER} \land \exists c(i, j) \in V(x, y) : c(i, j) \in \{8, 12\}
-$$
-
-#### 2.6. Emisión de Reclutamiento y Basurero
-- **Descripción:** Las celdas de `BASURERO` (`14`) y las coordenadas donde se acaba de limpiar un cadáver inyectan `255` en la Capa 5 (Reclutamiento) para coordinar tareas de higiene.
-- **Función de transición:**
-
-$$
-\delta_{\text{quim}}(c(x, y)) \rightarrow \text{Capa}_5(x, y) = 255 \iff c(x, y) = \text{BASURERO} \lor \text{Limpieza en } (x, y)
-$$
-
----
-
-### 3. Generación de Unidades en Nidos
-
-#### 3.1. Natalidad Estocástica por Casta y Colonia
-- **Descripción:** Los nidos (`NIDO_N` = `6` y `NIDO_R` = `10`) generan nuevas hormigas en celdas `VACIO` (`0`) de su vecindad $3 \times 3$ con $P_{\text{nac}} = 0.05$ por *tick*. Del total de nacimientos, el $80\%$ son Obreras ($U_2 \ge 0.20$) y el $20\%$ son Soldados ($U_2 < 0.20$).
-- **Función de transición:** Para una celda $c(x, y) = \text{VACIO}$ con $U_1(0, 1) < 0.05$:
-
-$$
-\delta(c(x, y)) = \begin{cases}
-\text{OBRERA N } (8) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 6 \land U_2 \ge 0.20 \\
-\text{SOLDADO N } (9) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 6 \land U_2 < 0.20 \\
-\text{OBRERA R } (12) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 10 \land U_2 \ge 0.20 \\
-\text{SOLDADO R } (13) & \text{si } \exists c(i, j) \in V(x, y) : c(i, j) = 10 \land U_2 < 0.20
-\end{cases}
-$$
-
----
-
-### 4. Inteligencia Colectiva y Movimiento Espacial
-
-#### 4.1. Escáner de Gradientes Químicos y Exploración
-- **Descripción:** Para una capa química $K$, la entidad evalúa las 8 celdas vecinas $d \in \{0, \dots, 7\}$. Elige la dirección $d^*$ que maximiza la concentración de feromona. Si el gradiente es $0$ en toda la vecindad, la hormiga selecciona una dirección aleatoria uniforme $U\{0, \dots, 7\}$ para explorar.
-  - **Obreras (`8` y `12`):** Evalúan $K = \text{Capa}_1$ (Rastro de Comida).
-  - **Soldados (`9` y `13`):** Evalúan $K = \text{Capa}_2$ (Alarma de Combate).
-- **Formulación matemática:**
-
-$$
-d^*(x, y) = \begin{cases}
-\arg\max_{d \in \{0..7\}} K(x + \Delta y_d, y + \Delta x_d) & \text{si } \max_{d \in \{0..7\}} K(x + \Delta y_d, y + \Delta x_d) > 0 \\
-U\{0, 1, 2, 3, 4, 5, 6, 7\} & \text{en caso contrario}
-\end{cases}
-$$
-
-#### 4.2. Intercambio de Celdas y Filtro de Terreno
-- **Descripción:** Las hormigas no se desplazan como objetos continuos, sino que transfieren su estado a la celda destino $(x', y')$. La transición ocurre solo si la unidad no se ha movido en el *tick* actual y el terreno destino es transitable (`VACIO` `0` o `ARENA_SECA` `1`). Muros (`2`) y otras entidades bloquean el paso.
-- **Coordenada destino:**
-
-$$
-(x', y') = (x + \Delta y_{d^{\ast}}, \, y + \Delta x_{d^{\ast}})
-$$
+🧪 Validación y Escenarios de Prueba
+El módulo motores_colab_corregidos.py incluye escenarios semilla y rutinas de medición independientes para ambos backends (NumPy y CuPy):
+Mapas semilla: mapa_asedio, mapa_laberinto (generación DFS con depredador móvil y veneno) y mapa_cementerio (limpieza de cadáveres y basureros).
+Benchmarking: benchmark_numpy(1000, 1000) y benchmark_cupy(1000, 1000) con sincronización explícita de streams CUDA (cp.cuda.Stream.null.synchronize()) para medir el tiempo real en milisegundos por tick.
