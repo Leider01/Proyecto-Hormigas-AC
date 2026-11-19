@@ -92,7 +92,7 @@ Abra su navegador en `http://localhost:8000` (si el puerto está ocupado, use `s
 
 ---
 
-## 🧪 Validación y Escenarios de Prueba
+## Validación y Escenarios de Prueba
 
 El módulo `motores_colab_corregidos.py` incluye escenarios semilla y rutinas de medición independientes para ambos *backends* (`NumPy` y `CuPy`):
 
