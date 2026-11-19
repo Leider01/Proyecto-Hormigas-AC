@@ -1,5 +1,0 @@
-# Motor en GPU (CuPy). Solo para tarjetas NVIDIA con controlador CUDA 13.
-# [ctk] trae las librerías de CUDA: no hace falta instalar el CUDA Toolkit.
-# Probado en una NVIDIA GeForce RTX 5070 Laptop (controlador 616.87).
--r requirements.txt
-cupy-cuda13x[ctk]==14.2.0
