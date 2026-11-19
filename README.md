@@ -1,4 +1,4 @@
-# 🐜 Simulador de Colonia de Hormigas — Autómata Celular (ACO)
+# Simulador de Colonia de Hormigas — Autómata Celular (ACO)
 
 > Proyecto final de la asignatura **Autómatas y Lenguajes Formales** (Universidad Industrial de Santander — UIS, Grupo 2, 2026-2).
 
@@ -6,7 +6,7 @@ Simulador interactivo en **"Modo Dios"** donde dos colonias de hormigas (**Negra
 
 Toda la simulación es calculada en paralelo sobre tarjeta gráfica NVIDIA mediante **`MotorCuPy`** (con respaldo equivalente en CPU vía **`MotorNumPy`**), mientras que el navegador renderiza el estado y envía las herramientas de edición en tiempo real.
 
-## 👥 Integrantes del Equipo
+## Integrantes del Equipo
 
 | Subgrupo | Rol Principal | Integrantes |
 | :--- | :--- | :--- |
@@ -16,7 +16,7 @@ Toda la simulación es calculada en paralelo sobre tarjeta gráfica NVIDIA media
 | **Subgrupo 4** | Reglas Biológicas, Calibración y Validación (QA) | <a href="https://github.com/Angel-Jimenez08"><img src="https://github.com/Angel-Jimenez08.png" width="30" height="30" align="absmiddle"></a> [**Ángel Santiago Jiménez Rincón**](https://github.com/Angel-Jimenez08) (`2251260`)<br><a href="https://github.com/xJulianGodoyx"><img src="https://github.com/xJulianGodoyx.png" width="30" height="30" align="absmiddle"></a> [**Pedro Julián Suarez Godoy**](https://github.com/xJulianGodoyx) (`2232725`)<br><a href="https://github.com/Derly0"><img src="https://github.com/Derly0.png" width="30" height="30" align="absmiddle"></a> [**Derly Yurany Sanabria Barragán**](https://github.com/Derly0) (`2245003`) |
 
 
-## 📐 Formalización Matemática del Modelo
+## Formalización Matemática del Modelo
 
 El ecosistema se modela formalmente como un **Autómata Celular Estocástico Multicapa con Memoria Auxiliar Acoplada**, definido mediante la $6$-tupla:
 
@@ -44,7 +44,7 @@ $$\mathcal{A} = \left( \mathcal{L}, \, \Sigma, \, \mathcal{Q}, \, \mathcal{E}, \
 
 ---
 
-## ⚙️ Dinámica del Motor (`motores_colab_corregidos.py`)
+## Dinámica del Motor (`motores_colab_corregidos.py`)
 
 ### Ciclo de cada Turno (`avanzar_tick`)
 
@@ -64,7 +64,7 @@ $$\mathcal{A} = \left( \mathcal{L}, \, \Sigma, \, \mathcal{Q}, \, \mathcal{E}, \
 
 ---
 
-## 🚀 Requisitos y Ejecución Local (GPU NVIDIA)
+## Requisitos y Ejecución Local (GPU NVIDIA)
 
 ### Requisitos previos
 - Tarjeta gráfica NVIDIA con soporte CUDA (requerida para `MotorCuPy`).
