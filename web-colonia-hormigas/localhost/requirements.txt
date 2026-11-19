@@ -1,4 +1,3 @@
 numpy
 scipy
 cupy-cuda13x[ctk]
-s
